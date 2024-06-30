@@ -1,0 +1,18 @@
+Summer Internship Report (02/08/2022)
+Hisham Iqbal Khokhar
+
+Objective - To build a web application that will allow admins to create a storage for test tasks and generate a test suite from them.
+
+- Added a feature in the app where one can view the attachment file from the template.
+- This was done using for loops and iterating through the attachments to get the required file and display it using a link.
+- Updated CSS and tml features of templates.
+- Started Unit testing of the project.
+- Came accross several issues because of migrating unwanted changes. Following were the issues and their solutions:
+   - Some fields were of wrong datatype, for example code generated is suppose to be a charfield but was entered as an autofield which was later fixed directly from MySQL command line.
+   - In some places, the same fields had different spellings in the models.py file and MySQL database. This error took some time to be noticed and was also fixed directly in the MySQL command line.
+   - Some Integerefields were missing their default value attributes which also threw errors.
+
+New Things in todays work - 
+ - Unit test cases.
+ - Potential bugs and errors from migrating unwanted changes.
+ - .url in templates. 

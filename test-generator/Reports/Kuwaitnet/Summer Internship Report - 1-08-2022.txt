@@ -1,0 +1,18 @@
+Summer Internship Report (01/08/2022)
+Hisham Iqbal Khokhar
+
+Objective - To build a web application that will allow admins to create a storage for test tasks and generate a test suite from them.
+
+- Used bootstrap documentation to update some features in the templates using html and css.
+- Added new features in the buttons, tables and textareas.
+- Added MEDIA_URL and MEDIA_ROOT in settings that take care of the attachments/files added in the admin page.
+- Now, an attachment automatically gets added to a folder called "uploads" in the media folder.
+- This is because of the "upload_to" argument used in FileFields which help uploading files in the specified folder. 
+- This helped imporove sorting and management of files.
+- Now, if an attachment is to be accessed in the app, the following url can be used:
+   http://127.0.0.1:8000/media/<filename>
+
+New Things in todays work:
+- Media Folder (MEDIA_URL, MEDIA_ROOT)
+- "upload_to" argument used in FileFields.
+- Various other css and html features from bootstrap.

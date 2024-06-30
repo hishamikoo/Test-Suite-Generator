@@ -1,0 +1,15 @@
+Summer Internship Report (25/07/2022)
+Hisham Iqbal Khokhar
+
+Objective - To build a web application that will allow admins to create a storage for test tasks and generate a test suite from them.
+
+- Connected MySQL to the project.
+- Built a form which could allow admins to specify the kind of test suite to be generated.
+- Linked the form to an html.
+- This html file also gathers data from MySQL database, which could be later sorted to be used as required.
+- The urls.py file is also updated accordingly as a new html file is made.
+
+New things in todays work:
+- For loops and if statements in Django Templates
+- Django Forms 
+- Dynamic values in django templates

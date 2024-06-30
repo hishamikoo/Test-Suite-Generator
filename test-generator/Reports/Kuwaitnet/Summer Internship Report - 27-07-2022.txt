@@ -1,0 +1,16 @@
+Summer Internship Report (27/07/2022)
+Hisham Iqbal Khokhar
+
+Objective - To build a web application that will allow admins to create a storage for test tasks and generate a test suite from them.
+
+- Tested to see if the password field of the form works as expected. A few errors came by which were eventually fixed by modifiying the fields list in the meta class of 
+  SuiteForm in forms.py.
+- Modified the templates by adding background colors to the webpage and modifying the text font and alligning text in a proper way.
+- Modified the Attachments model so that the file name and its contents can be rendered in the template.
+- The attachments model and attachments field in task model are 2 different things as in the attachments model, the file is uploaded in FileField and in 
+  the tasks model, the attachments field is a manytomany field. To read the contents of the file, the attachment in the FileField needs to opened as followed:
+       
+	 with open(self.file.path) as fp:
+             return fp.read()
+
+

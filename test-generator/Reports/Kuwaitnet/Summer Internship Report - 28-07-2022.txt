@@ -1,0 +1,15 @@
+Summer Internship Report (27/07/2022)
+Hisham Iqbal Khokhar
+
+Objective - To build a web application that will allow admins to create a storage for test tasks and generate a test suite from them.
+
+- Made /s/<Suite.code> protected by a password, which makes it available to only users who enter the correct password.
+- Created another ModelForm for a user to input password and access a test suite. 
+- As the correct password is entered , the user is redirected to the suite with the url: /s/<Suite.code>?password=<Suite.password>.
+- The password is added as GET parameter to the url.
+- A few additions were made in the views to achieve the above mentioned goals.
+- A view class by the name protected_suite was made, towards which the user is redirected, if the user wishes to protect the suite with a password.
+- If the correct password is entered, the suite generated is rendered, whereas a user wouldnt be able to proceed on entering a wrong password.
+
+
+
