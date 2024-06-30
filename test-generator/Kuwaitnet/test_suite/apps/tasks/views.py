@@ -83,7 +83,7 @@ def password_form(request, code, password):
                 "final": final
             }
             if Password==password:
-                return redirect("protected_suite", kwargs={"code": code, "password": password})
+                return redirect(reverse("protected_suite", kwargs={"code": code, "password": password}))
             elif Password!=password:
                 return render(request, "password_form.html", context)
         else:
