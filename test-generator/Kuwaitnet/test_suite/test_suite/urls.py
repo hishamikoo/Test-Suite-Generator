@@ -19,11 +19,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.views.static import serve
+from apps.tasks.admin import app_site
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path("", include("apps.tasks.urls")),
+    path('siteadmin/', app_site.urls),
 ]
 
 

@@ -1,0 +1,22 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <nav class = "navbar">
+        <ul>
+            <li><a href="">Generate</a></li>
+            <li><a href="">Select Suite</a></li>
+            <li style="float: right; margin-right: 10px;"><a href="/siteadmin/logout">logout</a></li>
+        </ul>
+    </nav>
+    {% block content %}
+    {%endblock content%}
+</body>
+</html>

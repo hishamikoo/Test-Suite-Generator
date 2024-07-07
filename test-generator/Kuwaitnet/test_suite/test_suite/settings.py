@@ -135,4 +135,4 @@ MEDIA_ROOT = BASE_DIR / "uploads"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_URL = "/admin/login/"
+LOGIN_URL = "/siteadmin/login/"

@@ -1,26 +1,5 @@
-<style>
-  .btn-btn-success{
-      color: rgb(46, 192, 192);
-      border-radius: 10px;
-      margin: 5px;
-      padding: 15px;
-      font-size: medium;
-      font-family: 'Times New Roman', Times, serif;
-      transition-duration: 0.4s;
-      border-color: #04AA6D;
-      
-  }
-  .btn-btn-success:hover {
-    background-color: #04AA6D; /* Green */
-    color: white;
-  }
-  #grad1 {
-    height: 200px;
-    background-color: red; 
-    background-image: linear-gradient(rgb(243, 213, 213), rgb(174, 174, 137), rgb(143, 200, 143));
-  }
-
-</style>
+{% extends "base.html" %}
+{%load static%}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,16 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Testing Suite Generator</title>
+  {%block content%}
   <body id="grad1">
     
     <!-- Let's greet our admin! Now if you open the site, you'll see the greeting: Try. -->
     <center>
-      <u><h1 style="font-family: Mishka">Testing Suite Generator</h1></u>
-      <h3 style="font-family: Mishka">Welcome, {{ request.user.username }}!</h3>
+      <h3 style="float: left">Cuurently logged in as, {{ request.user.username }}!</h3>
       <br /><br />
-      <h3>Suite Generator Form (Admin Access Only)</h3>
-      <br>
-      <i>* Use this form to generate a test suite. <i>
       <br><br>
       
       <form action="." method="post" enctype="multipart/form-data">
@@ -49,10 +25,11 @@
         {{ form.non_field_errors }}
         </table>
         <br>
-        <input type="submit" class="btn-btn-success"name="Submit" /><br />
+        <input type="submit" class="btn btn-success"name="Submit" /><br />
       </form>
       <br><br><br><br><br><br><br><br><br><br>
       <i>*If the form fails to proceed, please make sure you have entered a valid number in the "Number" field.<i>
     </center> 
   </body>
+  {%endblock content%}
 </html>
