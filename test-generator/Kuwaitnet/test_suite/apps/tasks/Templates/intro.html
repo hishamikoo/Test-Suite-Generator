@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {%load static%}
 
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,28 +10,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Testing Suite Generator</title>
-  {%block content%}
-  <body id="grad1">
+    
+  <body>
     
     <!-- Let's greet our admin! Now if you open the site, you'll see the greeting: Try. -->
-    <center>
-      <h3 style="float: left">Cuurently logged in as, {{ request.user.username }}!</h3>
+      {%block content%}
+      <center>
+
+      <h3 style="float: left">Currently logged in as, {{ request.user.username }}!</h3>
       <br /><br />
       <br><br>
       
-      <form action="." method="post" enctype="multipart/form-data">
+      <form class = "form" action="." method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <table>
-        {{ form.as_table }}
+        {{form.as_table}}
         {{ form.errors }}
         {{ form.non_field_errors }}
-        </table>
         <br>
         <input type="submit" class="btn btn-success"name="Submit" /><br />
       </form>
       <br><br><br><br><br><br><br><br><br><br>
       <i>*If the form fails to proceed, please make sure you have entered a valid number in the "Number" field.<i>
     </center> 
+    {%endblock content%}
+
   </body>
-  {%endblock content%}
 </html>

@@ -123,6 +123,15 @@ def protected_suite(request, code, password):
 def show_files(request):
     objects = Attachment.objects.all()
     context = {
-         {'objects': objects}
+         'objects': objects
     }
     return render('show.html',context, context_instance=RequestContext(request))
+
+
+
+def display_suite(request):
+    suite_list = Suite.objects.all()
+    context = {
+         'suite_list': suite_list
+    }
+    return render(request, 'display_suites.html',context)

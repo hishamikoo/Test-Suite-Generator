@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suites</title>
+</head>
+<body>
+    {%block content%}
+    <table border="1" style="width: 40%;margin:5%">
+        <thead>
+            <th>Creation Date</th>
+            <th>Created By</th>
+            <th>Suite Code</th>
+            <th>Security</th>
+        </thead>
+        
+    {% for suite in suite_list%}
+    <tr>
+        <td>{{suite.created}}</td>
+        <td>{{suite.created_by}}</td>
+        {%if suite.password%}
+        <td><a href = "/s/{{suite.code}}/{{suite.password}}">{{suite.code}}</a></td>
+        <td>Password Protected</td> 
+        {%else%}
+        <td><a href = "/s/{{suite.code}}">{{suite.code}}</a></td>
+        <td>None</td>
+        {%endif%}
+    </tr>
+    {%endfor%}
+    </table>
+    {%endblock%}
+</body>
+</html>

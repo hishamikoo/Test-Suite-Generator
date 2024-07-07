@@ -16,4 +16,6 @@ urlpatterns = [
     path("s/<code>/", views.show_suite, name="show_suite"),
     path("s/<code>/<password>", views.password_form, name = "password_form"),
     path("s/<code>?password=<password>", views.protected_suite, name = "protected_suite"),
+    path("display_suite/", views.display_suite, name="display_suite"),
+
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
