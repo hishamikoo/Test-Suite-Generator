@@ -3,8 +3,8 @@ from .models import Suite, Task # Note the relative import . you can also use ..
 
 
 class SuiteForm(forms.ModelForm):
-    language = forms.MultipleChoiceField(choices=Task.LANGUAGE_CHOICES)
-    number = forms.IntegerField()
+    language = forms.ChoiceField(choices=Task.LANGUAGE_CHOICES)
+    number = forms.IntegerField(min_value=1)
     password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'placeholder': 'Create a password (optional)'}))
 
     class Meta:

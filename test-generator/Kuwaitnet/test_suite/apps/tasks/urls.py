@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic.base import RedirectView
 
 from . import views
 
@@ -12,7 +13,8 @@ from . import views
 
 
 urlpatterns = [
-    path("", login_required(views.intro), name="intro"),
+    path('', RedirectView.as_view(url='/generate/', permanent=False)),  # Redirect root to /generate/
+    path("generate/", login_required(views.generate), name="generate"),
     path("s/<code>/", views.show_suite, name="show_suite"),
     path("s/<code>/<password>", views.password_form, name = "password_form"),
     path("s/<code>?password=<password>", views.protected_suite, name = "protected_suite"),

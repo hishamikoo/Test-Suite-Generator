@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.template import RequestContext
 
 
-def intro(request):
+def generate(request):
     # Ok i didn't saw this
     # Here, when you init the form, it should get some data in it
     form = SuiteForm(request.POST or None)  # if request is POST, it'll have POST data
@@ -35,7 +35,7 @@ def intro(request):
             # Now we are ready to get the DB entries
             password = form.cleaned_data["password"]
             if number < 0 :
-                return render(request, "intro.html", context)
+                return render(request, "generate.html", context)
             else:
                 # now connect this to Suite
                 tasks = Task.objects.filter(language=language).order_by("?")[:number] # Random ordering, limit the result to what we need
@@ -58,9 +58,7 @@ def intro(request):
     # the condition is True, then we just return from the function, no need for
     # a new branch in code
     # this will be reachable only if if request.method is POST
-    return render(request, "intro.html", context)
-
-
+    return render(request, "generate.html", context)
 
 
 

@@ -87,5 +87,5 @@ class Suite(models.Model):
 
     # Here you made the code as auto field, it's not correct
     # as per docs i provided it should be a charfield, which will be populated
-    # on save with alphanumeric 
+    # on save with alphanumeric
     # fix that later please
