@@ -1,74 +1,282 @@
-{%load static%}
-
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="{% static 'first.css' %}">
 <head>
   <title>Suite Generated</title>
   <meta charset="utf-8">
 </head>
-<body style="background-color:rgb(194, 224, 249)">
+<body>
 
+    <center>
+        <div class="container">
+            {% for task in suite.tasks.all %}
+                <div class="task-container">
+                    <div class="task-header"> Task {{ forloop.counter }}</div>
+                    <ul>
+                        <li><strong>Difficulty Level:</strong> {{ task.dificulty }}</li>
+                    </ul>
+                    <div class="task-content">
+                        <strong>Task:</strong>
+                        {% for attachment in task.attachments.all %}
+                            <p>{{ attachment.display_text_file }}</p>
+                            <a class="task-file-button" href="{{ attachment.file.url }}" target="_blank">Task Attachment File</a>
+                            <br>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Copy to Clipboard Section -->
+        <textarea id="alltext" cols="68" rows="5">
+            {% for task in suite.tasks.all %}
+                # Task #{{ forloop.counter }}
+                Difficulty Level : {{ task.dificulty }}
+                Task: {% for attachment in task.attachments.all %}
+                {{ attachment.display_text_file }}
+                # ===========================================================
+            {% endfor %}
+            {% endfor %}
+        </textarea>
+
+        <button type="button" onclick="copy()">Click here to Copy All Tasks To Clipboard</button>
+
+        <div class="note">
+            <i>*If this page is empty, there might not be any tasks available in the selected programming language.</i>
+            <br>
+        </div>
+    </center>
 
     <script>
     function copy() {
-    var copyText = document.getElementById('alltext')
-    copyText.select();
-    document.execCommand('copy')
-    console.log('Copied Text')
+        var copyText = document.getElementById('alltext');
+        copyText.select();
+        document.execCommand('copy');
+        console.log('Copied Text');
     }
     </script>
 
-<center>
-        <u><h1 style="font-family: Mishka">Task Suite Generated</h1></u>
-        <br><br><br><br>
-        <div class = "container">
-        {% for task in suite.tasks.all %}
-            # Task #{{ forloop.counter }}            
-            <br><br>
-            <table class="table table-striped">
-            <li>Dificulty Level : {{task.dificulty}}</li>
-            </table>
-            <br>
-            <div style="display: inline-block; text-align: left;width: 500px;">
-            Task: <br>
-            {% for attachment in task.attachments.all %}
-            <p>{{ attachment.display_text_file }}</p>
-            <center><Button class="btn btn-warning"><a href="{{ attachment.file.url }}" target ="_blank">Task Attachment File</a></Button></center>
-            <br/>
-            # ===========================================================
-        </div>
-        <br/>
-            {% endfor %}
-            <br>
-        {% endfor %}
-        </div>
-        <br>
-    <textarea id="alltext" cols="68" rows="5">
-            {% for task in suite.tasks.all %}
-            # Task #{{ forloop.counter }}            
-    
-            Dificulty Level : {{task.dificulty}}
-    
-            Task: {% for attachment in task.attachments.all %}
-            {{ attachment.display_text_file }}
-            # ===========================================================
-
-            {% endfor %}
-        {% endfor %}
-        
-    </textarea>
-    <br><br>      
-    <button type="button" class="btn btn-success" onclick="copy()"> Click here to Copy All Tasks To Clipboard</button>
-
-
-
-        <br><br><br><br>
-        <i>*If this page is empty, there might not be any tasks available in the selected programming language.</i>
-        <br>
-        <i>*If the number of tasks displayed is less than what you have requested, it is because there are only these tasks available. You can add more tasks to overcome this issue.</i>
-        <br><br><br><br>
-    </center>
 </body>
 </html>
+
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* General Body Styling */
+  body {
+    font-family: 'Inter', 'Cambria', sans-serif;
+    background-color: black; /* Base black background for the page */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)); /* Gradient + Optional Image */      
+    padding: 20px;
+    color: #333;
+  }
+  
+  /* Heading Style */
+  h1 {
+    font-size: 36px;
+    color: #ffffff;
+    text-decoration: underline;
+    margin-bottom: 30px;
+  }
+  
+  /* Container for the Task Suite */
+  .container {
+    margin-top: 100px;
+    max-width: 800px;
+    background: linear-gradient(to top left, #444, #666); /* Gradient from dark grey to lighter grey */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Task Container */
+  .task-container {
+    margin-bottom: 30px;
+  }
+  
+  .task-header {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-decoration: underline;
+  }
+  
+  .task-content {
+    background-color: #9e9e9e;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .task-file-button {
+    display: inline-block;
+    background-color: #867a50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  
+  .task-file-button:hover {
+    background-color: #867a50;
+    transform: scale(1.05); /* Slight zoom effect on hover */
+
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  li {
+    margin-bottom: 10px;
+  }
+  
+  /* Textarea Styling */
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background-color: #f7f7f7;
+    resize: vertical;
+  }
+  
+  /* Button Styling for Copy to Clipboard */
+  button {
+    background-color: #867a50;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #867a50;
+    transform: scale(1.05); /* Slight zoom effect on hover */
+
+  }
+  
+  /* Styling for the note section */
+  .note {
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+  }
+  
+  .note i {
+    font-style: italic;
+  }
+  
+  /* Add container and button styles for better spacing */
+  .center {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Task suite wrapper */
+  .task-suite-wrapper {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), url('https://www.example.com/your-image.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 50px 0;
+  }
+  
+  .task-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white for the task box */
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Container for the task file button with proper alignment */
+  .task-file-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  /* Adjust button hover effect */
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+  }
+  
+  button:active {
+    transform: scale(0.98); /* Slight shrink when clicked */
+  }
+  
+  /* Text Input Styling */
+  input[type="text"], input[type="password"], input[type="submit"], select, textarea {
+    background-color: transparent;
+    border: 1px solid #888;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #1e90ff;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+  }
+  
+  /* Label Styling */
+  label {
+    font-size: 16px;
+    color: white;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  /* Table Styling for any future table elements */
+  table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+  }
+  
+  table th, table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: #f7f7f7;
+    font-weight: bold;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  table tr:hover {
+    background-color: #ddd;
+  }
+  
+  </style>

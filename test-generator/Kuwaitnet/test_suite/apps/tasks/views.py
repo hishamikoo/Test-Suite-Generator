@@ -8,8 +8,6 @@ from django.core.paginator import Paginator
 
 
 def generate(request):
-    # Clear any previous form data from the session to ensure the form starts empty
-    request.session['form_data'] = {}
     # Ok i didn't see this
     # Here, when you init the form, it should get some data in it
     form = SuiteForm(request.POST or None)  # if request is POST, it'll have POST data
