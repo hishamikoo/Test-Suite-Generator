@@ -147,3 +147,7 @@ def display_suite(request):
     }
     
     return render(request, 'display_suites.html', context)
+
+
+def home(request):
+    return render(request, 'home.html')

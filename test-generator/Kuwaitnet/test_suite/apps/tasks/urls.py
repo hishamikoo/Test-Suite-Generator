@@ -17,6 +17,7 @@ from . import views
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/home/', permanent=False)),  # Redirect root to /generate/
+    path('home/', views.home, name = "home"),
     path("generate/", login_required(views.generate), name="generate"),
     path("s/<code>/", views.show_suite, name="show_suite"),
     path("s/<code>/<password>", views.password_form, name = "password_form"),
