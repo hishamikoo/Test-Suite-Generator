@@ -1,5 +1,4 @@
-{% extends "base.html" %}
-{%load static%}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,29 +8,197 @@
     <title>Suites</title>
 </head>
 <body>
-    {%block content%}
-    <table border="1" style="width: 40%;margin:5%">
-        <thead>
-            <th>Creation Date</th>
-            <th>Created By</th>
-            <th>Suite Code</th>
-            <th>Security</th>
-        </thead>
+    {% block content %}
+
+    <div class="container">
+
+
+        <!-- Display the paginated table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Creation Date</th>
+                    <th>Created By</th>
+                    <th>Suite Code</th>
+                    <th>Security</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for suite in page_obj %}
+                <tr>
+                    <td>{{ suite.created }}</td>
+                    <td>{{ suite.created_by }}</td>
+                    {% if suite.password %}
+                    <td><a href="/s/{{ suite.code }}/{{ suite.password }}">{{ suite.code }}</a></td>
+                    <td>Password Protected</td>
+                    {% else %}
+                    <td><a href="/s/{{ suite.code }}">{{ suite.code }}</a></td>
+                    <td>None</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="rows-select">
+            <label for="rowsPerPage">Suites per page:</label><br><br>
+            <form method="GET" action="">
+                <select name="rows_per_page" id="rowsPerPage" onchange="this.form.submit()">
+                    <option value="10" {% if request.GET.rows_per_page == '10' %}selected{% endif %}>10</option>
+                    <option value="20" {% if request.GET.rows_per_page == '20' %}selected{% endif %}>20</option>
+                    <option value="50" {% if request.GET.rows_per_page == '50' %}selected{% endif %}>50</option>
+                    <option value="100" {% if request.GET.rows_per_page == '100' %}selected{% endif %}>100</option>
+                </select>
+            </form>
+        </div>
+        <!-- Pagination controls -->
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1&rows_per_page={{ request.GET.rows_per_page }}">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}&rows_per_page={{ request.GET.rows_per_page }}">Previous</a>
+            {% else %}
+                <a class="disabled" href="#">First</a>
+                <a class="disabled" href="#">Previous</a>
+            {% endif %}
+
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&rows_per_page={{ request.GET.rows_per_page }}">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}&rows_per_page={{ request.GET.rows_per_page }}">Last</a>
+            {% else %}
+                <a class="disabled" href="#">Next</a>
+                <a class="disabled" href="#">Last</a>
+            {% endif %}
+        </div>
         
-    {% for suite in suite_list%}
-    <tr>
-        <td>{{suite.created}}</td>
-        <td>{{suite.created_by}}</td>
-        {%if suite.password%}
-        <td><a href = "/s/{{suite.code}}/{{suite.password}}">{{suite.code}}</a></td>
-        <td>Password Protected</td> 
-        {%else%}
-        <td><a href = "/s/{{suite.code}}">{{suite.code}}</a></td>
-        <td>None</td>
-        {%endif%}
-    </tr>
-    {%endfor%}
-    </table>
-    {%endblock%}
+    </div>
+
+    {% endblock %}
 </body>
 </html>
+
+
+<style>
+    /* Set the background of the entire page to black */
+    head, body {
+        font-family: Arial, 'Cambria';
+        background-color: #000; /* Black background */
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)); /* Gradient + Optional Image */
+        color: #fff; /* White text color for contrast */
+    }
+
+    /* Container style for the content */
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+        padding: 20px;
+        background-color: #444; /* Dark grey background */
+        background: linear-gradient(to top left, #444, #666); /* Gradient from dark grey to lighter grey */
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #fff; /* White color for the heading */
+        margin-bottom: 20px;
+    }
+
+    /* Table styling */
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        background-color: #444; /* Dark grey background for table */
+    }
+
+    table, th, td {
+        border: 1px solid #666; /* Light grey border */
+        text-align: left;
+    }
+
+    th, td {
+        padding: 12px 15px;
+    }
+
+    th {
+        background-color: #555; /* Slightly darker grey for table headers */
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #555; /* Darker grey for even rows */
+    }
+
+    tr:hover {
+        background-color: #666; /* Lighter grey on hover */
+    }
+
+    /* Pagination controls */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    .pagination a {
+        padding: 10px 15px;
+        background-color: #7091b3; /* Blue background for pagination buttons */
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .pagination a:hover {
+        background-color: #7091b3; /* Darker blue on hover */
+        transform: scale(1.05); /* Slight zoom effect on hover */
+
+    }
+
+    .pagination a.disabled {
+        background-color: #e0e0e0; /* Light grey for disabled buttons */
+        cursor: not-allowed;
+    }
+
+    /* Rows per page selection styling */
+    .rows-select {
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .rows-select label {
+        font-size: 16px;
+        color: #fff; /* White text for the label */
+        margin-right: 10px;
+    }
+
+    .rows-select select {
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #666; /* Light grey border */
+        background-color: #444; /* Dark grey background */
+        color: #fff; /* White text */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        table {
+            font-size: 14px;
+        }
+
+        .pagination a {
+            font-size: 12px;
+            padding: 8px 12px;
+        }
+    }
+</style>

@@ -1,106 +1,83 @@
-/* LOGIN FORM */
-
-.login {
-    background-color: #f0f4f8; /* Soft light blue background */
-    height: auto;
-    font-family: 'Arial', sans-serif; /* Modern sans-serif font */
-}
-
-.login #header {
-    height: auto;
-    padding: 20px 16px; /* Increased padding for better spacing */
+/* Black background styling */
+body.login-body {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
     justify-content: center;
-    text-align: center; /* Centered text */
-    background-color: #1e90ff; /* Attractive blue background */
-    color: white; /* White text for contrast */
+    align-items: center;
+    height: 100vh; /* Full height of viewport */
 }
 
-.login #header h1 {
-    font-size: 24px; /* Larger font size */
-    margin: 0;
-}
-
-.login #header h1 a {
-    color: #ffdd57; /* Bright color for links */
-    text-decoration: none; /* No underline */
-}
-
-.login #header h1 a:hover {
-    text-decoration: underline; /* Underline on hover */
-}
-
-.login #content {
-    padding: 30px 20px 0; /* More padding for better spacing */
-}
-
-.login #container {
-    background: white; /* White background for the form */
-    border: none; /* Removed border */
-    border-radius: 8px; /* Increased border radius for softer edges */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+/* Center the login container */
+.login-container {
     width: 100%;
-    max-width: 400px; /* Maximum width */
-    margin: 50px auto; /* Centered with margin */
-    padding: 20px; /* Padding inside the container */
+    max-width: 400px;
+    padding: 20px;
 }
 
-.login .form-row {
-    margin-bottom: 15px; /* Space between form rows */
-}
-
-.login .form-row label {
-    display: block;
-    line-height: 1.5em;
-    font-weight: bold; /* Bold labels */
-    color: #333; /* Dark color for contrast */
-}
-
-.login .form-row #id_username, .login .form-row #id_password {
-    padding: 10px; /* More padding for input fields */
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #ccc; /* Light border */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 16px; /* Larger font size */
-}
-
-.login .form-row #id_username:focus, .login .form-row #id_password:focus {
-    border-color: #1e90ff; /* Blue border on focus */
-    outline: none; /* Remove default outline */
-    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); /* Glow effect */
-}
-
-.login .submit-row {
-    padding: 1em 0 0 0;
-    margin: 0;
+/* Styling for the login box */
+.login-box {
+    background-color: #1a1a1a; /* Dark grey box */
+    border-radius: 8px; /* Rounded corners */
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow for depth */
     text-align: center;
 }
 
-.login .submit-row button {
-    background-color: #1e90ff; /* Attractive blue button */
-    color: white; /* White text */
-    padding: 10px 20px; /* Padding for button */
-    border: none; /* No border */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 16px; /* Larger font size */
-    cursor: pointer; /* Pointer cursor */
-    transition: background-color 0.3s ease; /* Smooth transition */
+/* Login heading */
+.login-box h1 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 24px;
 }
 
-.login .submit-row button:hover {
-    background-color: #1c7ed6; /* Darker blue on hover */
+/* Form rows */
+.form-row {
+    margin-bottom: 15px;
+    text-align: left;
 }
 
-.login .password-reset-link {
-    text-align: center;
-    margin-top: 10px; /* Space above the link */
+/* Input fields */
+.form-row input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
 }
 
-.login .password-reset-link a {
-    color: #1e90ff; /* Blue color for link */
-    text-decoration: none; /* No underline */
+/* Input focus styles */
+.form-row input:focus {
+    border-color: #596e82;
+    outline: none;
+    box-shadow: 0 0 5px rgba(53, 57, 61, 0.5);
 }
 
-.login .password-reset-link a:hover {
-    text-decoration: underline; /* Underline on hover */
+/* Submit button */
+.submit-row button {
+    width: 100%;
+    padding: 10px;
+    background-color: #222528;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-row button:hover {
+    background-color: #42515d;
+}
+
+/* Responsiveness */
+@media (max-width: 500px) {
+    .login-box {
+        padding: 20px;
+    }
 }

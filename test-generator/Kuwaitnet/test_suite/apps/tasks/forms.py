@@ -3,9 +3,9 @@ from .models import Suite, Task # Note the relative import . you can also use ..
 
 
 class SuiteForm(forms.ModelForm):
-    language = forms.ChoiceField(choices=Task.LANGUAGE_CHOICES)
-    number = forms.IntegerField(min_value=1)
-    password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'placeholder': 'Create a password (optional)'}))
+    language = forms.ChoiceField(choices=Task.LANGUAGE_CHOICES, label="Programming Language")
+    number = forms.IntegerField(min_value=1, label="Number of Tasks")
+    password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'placeholder': 'Create a password'}), label = "Create Password (Optional)")
 
     class Meta:
         model = Suite

@@ -1,47 +1,64 @@
-  .btn{
-      color: rgb(46, 192, 192);
-      border-radius: 10px;
-      margin: 5px;
-      padding: 15px;
-      font-size: medium;
-      font-family: 'Times New Roman', Times, serif;
-      transition-duration: 0.4s;
-      border-color: #04AA6D;
-      
-  }
-  .btn:hover {
-    background-color: #04AA6D; /* Green */
-    color: white;
-  }
-
-.navbar ul{
-  list-style-type: none;
-  background-color: darkgray;
-  padding: 0px;
-  margin: 0px;
-  overflow: hidden;
+/* Sidebar Styles */
+.sidebar {
+  height: 100%;
+  width: 0; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  color: white;
+  overflow-x: hidden;
+  transition: 0.5s; /* Smooth transition */
+  padding-top: 60px;
+  z-index: 1000; /* Ensure the sidebar is above content */
 }
 
-.navbar a{
+.sidebar.active {
+  width: 250px; /* Sidebar visible */
+}
+
+.sidebar-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-links li {
+  padding: 8px 16px;
+}
+
+.sidebar-links li a {
   color: white;
   text-decoration: none;
-  padding: 15px;
   display: block;
-  text-align: center;
-  transition-duration: 0.4s;
-
+  transition: 0.3s;
 }
 
-.navbar a:hover{
-  background-color: #04AA6D; /* Green */
+.sidebar-links li a:hover {
+  background-color: #04AA6D;
   color: black;
-  
 }
 
-.navbar li{
-  float: left;
+/* Toggle button */
+.toggle-btn {
+  font-size: 30px;
+  background-color: #333;
+  color: white;
+  border: none;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1500;
 }
 
-.logout{
-  float: right;
+/* Main Content Styles */
+#main-content {
+  transition: margin-left 0.5s; /* Smooth transition */
+  padding: 20px;
+}
+
+#main-content.shifted {
+  margin-left: 250px; /* Shift content when sidebar is open */
 }

@@ -3,10 +3,14 @@ from .forms import SuiteForm, ProtectedSuiteForm
 from .models import Suite, Task, Attachment
 from django.urls import reverse
 from django.template import RequestContext
+from django.core.paginator import Paginator
+
 
 
 def generate(request):
-    # Ok i didn't saw this
+    # Clear any previous form data from the session to ensure the form starts empty
+    request.session['form_data'] = {}
+    # Ok i didn't see this
     # Here, when you init the form, it should get some data in it
     form = SuiteForm(request.POST or None)  # if request is POST, it'll have POST data
     context = {
@@ -41,7 +45,7 @@ def generate(request):
                 tasks = Task.objects.filter(language=language).order_by("?")[:number] # Random ordering, limit the result to what we need
                 suite.tasks.add(*tasks)
             #how bout adding the tasks to suite using for loop
-            # it's not required actuallyu, the issue was with language, it comes as list, cause it's a select, but
+            # it's not required actually, the issue was with language, it comes as list, cause it's a select, but
             # it should be fine now
             # So when we get the suite object, we can redirect the user to 
             # a /s/<somecode> url
@@ -128,8 +132,20 @@ def show_files(request):
 
 
 def display_suite(request):
+    # Fetch all suites from the database
     suite_list = Suite.objects.all()
+
+    # Get the "rows per page" value from the request (default to 10)
+    rows_per_page = request.GET.get('rows_per_page', 10)
+    paginator = Paginator(suite_list, rows_per_page)
+
+    # Get the current page number (default to 1)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    # Pass the paginated result to the template
     context = {
-         'suite_list': suite_list
+        'page_obj': page_obj,
     }
-    return render(request, 'display_suites.html',context)
+    
+    return render(request, 'display_suites.html', context)

@@ -1,34 +1,189 @@
-{% extends "base.html" %}
-{%load static%}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="form-container">
+            <h2>Configure Your Task Generation Settings</h2> <!-- You can replace this with the actual form title -->
+            
+            <form class="form" action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Form Fields -->
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                
+                <!-- Display Form Errors -->
+                {% if form.errors %}
+                    <div class="error-notes">
+                        <ul>
+                            {% for error in form.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                
+                <div class="form-group">
+                  <button type="submit" class="btn btn-submit">
+                    Generate
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.742a6 6 0 1 0-1.416 1.416l3.9 3.9a1 1 0 0 0 1.416-1.416l-3.9-3.9zM12 6a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
+                  </svg>
+                </button>
+                </div>
+            </form>
+            <div class="suite-redirect">
+              <a href="/display_suite/?page=1&rows_per_page=10" class="btn btn-redirect">
+                  Select from Existing Publicly Generated Suites
+              </a>
+          </div>
+        </div>
+
+    </div>
+{% endblock content %}
 
 
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Testing Suite Generator</title>
-    
-  <body>
-    
-      {%block content%}
-      <center>
 
-      <br /><br/>
-      <br><br>
-      
-      <form class = "form" action="." method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form.as_table}}
-        {{ form.errors }}
-        {{ form.non_field_errors }}
-        <br>
-        <input type="submit" class="btn btn-success"name="Submit" /><br />
-      </form>
-    </center> 
-    {%endblock content%}
+<style>
+/* Remove margin and padding from body and html */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; 
+  width: 100%; 
+  font-family: 'Inter', 'Cambria'; 
+}
+.btn-redirect {
+  display: inline-block;
+  padding: 10px 40px;
+  background-color: #867a50; /* Set a color for the redirect button */
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none; /* Remove underline */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px; /* Adds space between the form and button */
+}
 
-  </body>
-</html>
+.btn-redirect:hover {
+  background-color: #867a50; /* Darken the color on hover */
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.suite-redirect {
+  text-align: center; /* Center the button */
+  margin-top: 20px; /* Space between the form and the button */
+}
+
+.btn-submit {
+  margin-left: 150px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 50px;
+  background-color: #7091b3;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.btn-submit:hover{
+  background-color: #7091b3;
+  color: white;
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.btn-submit svg {
+  margin-left: 10px; /* Adds spacing between text and icon */
+  font-size: 20px; /* Adjust size of the magnifying glass */
+}
+
+
+/* Keep the rest of your container styles */
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black; /* Base black background for the page */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), url('https://www.example.com/your-image.jpg'); /* Gradient + Optional Image */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Optional: Add a pattern or texture on top of the black background (replace with your image URL) */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://www.example.com/pattern-image.png'); /* Replace with the URL of the texture/pattern image */
+  opacity: 0.2; /* Make the pattern subtle */
+  pointer-events: none; /* Ensure it doesn't block form interactions */
+}
+
+.form-container {
+  background: linear-gradient(to top left, #444, #666); /* Gradient from dark grey to lighter grey */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a card-like effect */
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  color: white; /* Set text color to white for contrast */
+  position: relative;
+  z-index: 10; /* Keep the form above the pattern */
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #fff; /* Set title text color to white */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+form input[type="submit"] {
+  background-color: #1e90ff; /* Bright Blue */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form input[type="submit"]:hover {
+  background-color: #1c7ed6; /* Darker blue on hover */
+}
+
+.error-notes {
+  color: #f44336; /* Red color for errors */
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.error-notes ul {
+  padding-left: 20px;
+}
+
+.error-notes li {
+  font-size: 14px;
+}
+
+
+  </style>

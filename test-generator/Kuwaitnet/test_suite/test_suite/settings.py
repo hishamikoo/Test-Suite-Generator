@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tasking',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'hikjik123',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {
@@ -136,3 +136,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_URL = "/siteadmin/login/"
+
+LOGOUT_REDIRECT_URL = '/siteadmin/login/'  

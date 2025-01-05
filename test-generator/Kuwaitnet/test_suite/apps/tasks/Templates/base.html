@@ -1,25 +1,46 @@
-{%load static%}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="{% static 'style.css' %}">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Example</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <nav class = "navbar">
-        <ul>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <button id="toggle-btn" class="toggle-btn">&#9776;</button>
+        <ul class="sidebar-links">
             <li><a href="/generate/">Generate</a></li>
             <li><a href="/display_suite/">Select Suite</a></li>
-            <li style="float: right; margin-right: 10px;"><a href="/siteadmin/logout">Logout</a></li>
+            <li><a href="/siteadmin/logout">Logout</a></li>
         </ul>
-    </nav>
-    {% block content %}
-    {%endblock content%}
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <script>
+        // Toggle sidebar visibility on button click
+        document.getElementById('toggle-btn').addEventListener('click', function() {
+            var sidebar = document.getElementById('sidebar');
+            var mainContent = document.getElementById('main-content');
+
+            // Toggle the 'active' class on the sidebar
+            sidebar.classList.toggle('active');
+            // Toggle the 'shifted' class on the main content
+            mainContent.classList.toggle('shifted');
+        });
+    </script>
+    
 </body>
 </html>
