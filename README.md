@@ -2,6 +2,9 @@
 
 TaskGen is a powerful and intuitive Django-based web application designed to create customizable task suites for developer interviews. Built to streamline the interview process, this app uses a comprehensive knowledge base to generate coding tasks and questions similar to platforms like LeetCode. It empowers users to create tailored suites of programming challenges that align with their unique requirements.
 
+![](https://github.com/hishamikoo/Test-Suite-Generator/blob/main/generate.gif)
+
+
 <h3>Key Features:</h3>
 
 - Customizable Task Difficulty: Users can specify the desired difficulty level of tasks (e.g., Easy, Medium, Hard) to match the skill level being assessed.
